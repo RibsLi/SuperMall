@@ -45,7 +45,7 @@
 // export default router
 
 
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const Home = () => import('views/home/Home')
 const Category = () => import('views/category/Category')
@@ -76,7 +76,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
