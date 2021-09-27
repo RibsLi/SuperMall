@@ -1,4 +1,5 @@
 <template>
+<!-- 顶部导航组件 -->
   <div class="nav-bar">
     <div class="left"><slot name="left"></slot></div>
     <div class="center"><slot name="center"></slot></div>

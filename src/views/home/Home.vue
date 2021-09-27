@@ -7,6 +7,7 @@
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view></feature-view>
     <tab-control class="tab-control" :titles="['流行', '新款', '精选']"></tab-control>
+    <goods-list :goods="goods['pop'].list"></goods-list>
     <ul>
       <li>liebiao1</li>
       <li>liebiao2</li>
@@ -23,13 +24,21 @@
 </template>
 
 <script>
+  // 导航
   import NavBar from 'components/common/navbar/NavBar'
   import TabControl from 'components/content/tabControl/TabControl'
 
+  //商品
+  import GoodsList from 'components/content/goods/GoodsList'
+
+  //轮播
   import HomeSwiper from './childComps/HomeSwiper'
+  //推荐
   import RecommendView from './childComps/RecommendView'
+  // 本周流行
   import FeatureView from './childComps/FeatureView'
 
+  //请求数据
   import { getHomeMultidata, getHomeGoods } from 'network/home'
 
   export default {
@@ -37,6 +46,7 @@
     components: {
       NavBar,
       TabControl,
+      GoodsList,
       HomeSwiper,
       RecommendView,
       FeatureView
@@ -71,20 +81,16 @@
       },
       //请求商品数据
       getHomeGoods(type) {
+        // [type]是因为他是变了所以不能写成.type
         const page = this.goods[type].page +1
         getHomeGoods(type, page).then(res => {
-          // console.log(res);
+          console.log(res);
+          // ...表示可变参数也是一种解构方式，把新拿到的数组一个一个加到原有的数组中，也可以使用for循环一个个加到原数组中，此处不能用=这样会覆盖原有的数组
           this.goods[type].list.push(...res.data.data.list)
           this.goods[type].page += 1
         })
       }
-      // getHomeGoods(type){
-			// 	const page = this.goods[type].page + 1
-			// 	getHomeGoods(type, page).then(res => {
-			// 		this.goods[type].list.push(...res.data.data.list)
-			// 		this.goods[type].page += 1
-			// 	})
-			// }
+      
     }
   }
 </script>

@@ -1,5 +1,7 @@
 import { request } from "./request";
 
+// homejs管理requesjs网络请求的url
+
 export function getHomeMultidata() {
   return request({
     url: '/home/multidata'

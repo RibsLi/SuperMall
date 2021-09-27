@@ -1,4 +1,5 @@
 <template>
+<!-- 底部TabBaritem小组件 -->
   <div class="tab-bar-item" @click="itemClick">
     <div v-if="!isActive">
       <slot name="item-icon"></slot>

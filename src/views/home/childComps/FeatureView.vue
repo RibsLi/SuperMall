@@ -1,4 +1,5 @@
 <template>
+<!-- 本周流行组件 -->
   <div class="feature">
     <a href="https://act.mogujie.com/zzlx67"></a>
     <img src="~assets/img/home/recommend_bg.jpg" alt="">

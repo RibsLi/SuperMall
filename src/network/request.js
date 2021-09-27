@@ -3,7 +3,8 @@ import axios from 'axios'
 //创建网络请求
 export function request(config) {
   const instanca = axios.create({
-    baseURL: 'http://123.207.32.32:8000',
+    // baseURL: 'http://123.207.32.32:8000',
+    baseURL: 'http://152.136.185.210:8000/api/w6',
     timeout: 5000
   })
   //axios拦截器:请求拦截，响应拦截

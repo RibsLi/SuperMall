@@ -1,4 +1,5 @@
 <template>
+<!-- 底部TabBar和TabBarItem入口 -->
   <tab-bar>
     <tab-bar-item path="/home">
       <template v-slot:item-icon>
