@@ -43,6 +43,7 @@ export default {
 }
 .goods-info {
   position: absolute;
+  overflow: hidden;
   left: 0;
   right: 0;
   bottom: 5px;
