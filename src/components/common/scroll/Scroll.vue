@@ -40,15 +40,13 @@ export default {
       observeImage: true
     })
     //监听滚动位置，默认情况下是不监听的
-    this.scroll.on('scroll', (createpositon) => {
-      // console.log(createpositon);
-      this.$emit('scroll', createpositon)
-    })
+    if(this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on('scroll', (createpositon) => {
+        // console.log(createpositon);
+        this.$emit('scroll', createpositon)
+      })
+    }
     //上拉加载更多
-    // this.scroll.on('pullingUp', () => {
-    //   // console.log('more');
-    //   this.$emit('pullingUp')
-    // })
     this.scroll.on("pullingUp", () => {
       this.$emit("pullingUp");
     });
@@ -58,9 +56,10 @@ export default {
     scrollTo(x, y, time=300) {
       this.scroll.scrollTo(x, y, time)
     },
+    //结束上拉加载
     finishPullUp() {
       this.scroll.finishPullUp()
-    }
+    },
   },
 }
 </script>

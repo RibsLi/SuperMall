@@ -120,6 +120,7 @@
         // console.log(createpositon);
         this.isShowBackTop = createpositon.y < -1000
       },
+      //上拉加载更多
       loadMore() {
         this.getHomeGoods(this.currentType);
     }
@@ -149,11 +150,12 @@
     top: 0;
     z-index: 9;
   }
-  .tab-control {
+  /* 使用better-scroll后sticky就失效，且改属性较新，兼容差 */
+  /* .tab-control {
     position: sticky;
     top: 44px;
     z-index: 9;
-  }
+  } */
   .content {
     position: absolute;
     top: 44px;
