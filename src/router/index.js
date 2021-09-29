@@ -52,6 +52,8 @@ const Category = () => import('views/category/Category')
 const Cart = () => import('views/cart/Cart')
 const Profile = () => import('views/profile/Profile')
 
+const Datail = () => import('views/datail/Datail')
+
 const routes = [
   {
     path: '',
@@ -72,6 +74,10 @@ const routes = [
   {
     path: '/profile',
     component: Profile
+  },
+  {
+    path: '/datail/:id',
+    component: Datail
   }
 ]
 

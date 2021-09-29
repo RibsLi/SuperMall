@@ -67,7 +67,8 @@
         currentType: 'pop',
         isShowBackTop: false,
         tabOffsetTop: 0,
-        isTabFixed: false
+        isTabFixed: false,
+        saveY: 0
       }
     },
     created() {//created里面的方法都封装到了methods里面
@@ -77,6 +78,14 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
+    },
+    activated() {
+      this.$refs.scroll.scrollTo(0 , this.saveY, 0)
+    },
+    deactivated() {
+      //切换组件时保存当前位置
+      this.saveY = this.$refs.scroll.getScrollY()
+      // console.log(this.$refs.scroll.scroll.y);
     },
     methods: {
       //请求banner数据

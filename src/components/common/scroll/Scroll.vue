@@ -28,6 +28,7 @@ export default {
     }
   },
   mounted() {
+    // console.log(this.$refs.wrapper);
     this.scroll = new BScroll(this.$refs.wrapper, {
       //probeType：侦测，probeType作用：决定是否派发 scroll 事件；probeType 为 0，在任何时候都不派发 scroll 事件；probeType 为 1，仅仅当手指按在滚动区域上，每隔 momentumLimitTime 毫秒派发一次 scroll 事件；probeType 为 2，仅仅当手指按在滚动区域上，一直派发 scroll 事件；probeType 为 3，任何时候都派发 scroll 事件，包括调用 scrollTo 或者触发 momentum 滚动动画
       probeType: this.probeType,
@@ -60,6 +61,9 @@ export default {
     finishPullUp() {
       this.scroll.finishPullUp()
     },
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0
+    }
   },
 }
 </script>
