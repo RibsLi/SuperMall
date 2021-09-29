@@ -2,7 +2,7 @@
   <swiper>
     <swiper-item v-for="item in banners" :key='item'>
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt="" @load="imgLoad">
       </a>
     </swiper-item>
   </swiper>
@@ -13,6 +13,11 @@
 
   export default {
     name: "HomeSwiper",
+    data() {
+      return {
+        isLoad: false
+      }
+    },
     props: {
       banners: {
         type: Array,
@@ -24,7 +29,17 @@
     components: {
       Swiper,
       SwiperItem
-    }
+    },
+    methods: {
+      // TabControl的吸顶效果
+      imgLoad() {
+        // console.log('---');
+        if(!this.isLoad) {
+          this.$emit('swiperImgLoad')
+          this.isLoad = true
+        }
+      }
+    },
   }
 </script>
 

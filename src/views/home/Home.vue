@@ -3,16 +3,18 @@
     <nav-bar class="home-nav">
       <template v-slot:center>购物街</template>
     </nav-bar>
+    <!-- 吸顶效果 -->
+    <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl1" v-show="isTabFixed"></tab-control>
     <!-- 滚动条 -->
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp="loadMore">
       <!-- 轮播图 -->
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"></home-swiper>
       <!-- 推荐 -->
       <recommend-view :recommends="recommends"></recommend-view>
       <!-- 本周流行 -->
       <feature-view></feature-view>
       <!-- 小导航 -->
-      <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
+      <tab-control :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"></tab-control>
       <!-- 商品列表 -->
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
@@ -63,7 +65,9 @@
           'sell': {page: 0, list: []},
         },
         currentType: 'pop',
-        isShowBackTop: false
+        isShowBackTop: false,
+        tabOffsetTop: 0,
+        isTabFixed: false
       }
     },
     created() {//created里面的方法都封装到了methods里面
@@ -109,21 +113,32 @@
             this.currentType = 'sell'
             break
         }
+        // 解决两个tabcontrol点击后不一致的问题
+        this.$refs.tabControl1.currentIndex = index
+        this.$refs.tabControl2.currentIndex = index
       },
       // 返回顶部
       backTopClick() {
         // console.log('backtop');
         this.$refs.scroll.scrollTo(0, 0)
       },
-      //设置返回顶部按钮的显示隐藏
       contentScroll(createpositon) {
         // console.log(createpositon);
-        this.isShowBackTop = createpositon.y < -1000
+        //设置返回顶部按钮的显示隐藏
+        this.isShowBackTop = (-createpositon.y) > 800
+        // 决定tabcontrol是否吸顶，给他一个positi:fixed
+        this.isTabFixed = (-createpositon.y) > this.tabOffsetTop
+
       },
       //上拉加载更多
       loadMore() {
         this.getHomeGoods(this.currentType);
-    }
+      },
+      // TabControl的吸顶效果
+      swiperImgLoad() {
+        // console.log(this.$refs.tabControl.$el.offsetTop);
+        this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
+      }
       
     },
     computed: {
@@ -144,11 +159,12 @@
   .home-nav {
     background-color: var(--color-tint);
     color: #fff;
-    position: fixed;
+
+    /* position: fixed;
     left: 0;
     right: 0;
     top: 0;
-    z-index: 9;
+    z-index: 9; */
   }
   /* 使用better-scroll后sticky就失效，且改属性较新，兼容差 */
   /* .tab-control {
@@ -169,4 +185,8 @@
     margin-top: 44px;
     overflow: hidden;
   } */
+  .tab-control {
+    position: relative;
+    z-index: 9;
+  }
 </style>
