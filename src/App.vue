@@ -2,7 +2,7 @@
 
   <div id="app">
     <router-view v-slot="{Component}">
-      <keep-alive>
+      <keep-alive exclude="Detail">
       <component :is="Component"></component>
       </keep-alive>
     </router-view>

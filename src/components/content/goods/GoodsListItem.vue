@@ -22,11 +22,12 @@ export default {
   },
   computed: {
     showImage(){
-      return this.goodsItem.image ||  this.goodsItem.show.img
+      return this.goodsItem.image || this.goodsItem.show.img
     }
   },
   methods: {
     goodsItemClick() {
+      //获取商品id
       this.$router.push("/detail/" + this.goodsItem.iid);
       
     },

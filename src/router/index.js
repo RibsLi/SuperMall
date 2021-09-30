@@ -51,8 +51,7 @@ const Home = () => import('views/home/Home')
 const Category = () => import('views/category/Category')
 const Cart = () => import('views/cart/Cart')
 const Profile = () => import('views/profile/Profile')
-
-const Datail = () => import('views/datail/Datail')
+const Detail = () => import('views/detail/Detail')
 
 const routes = [
   {
@@ -76,9 +75,9 @@ const routes = [
     component: Profile
   },
   {
-    path: '/datail/:id',
-    component: Datail
-  }
+    path: '/detail/:iid',
+    component: Detail
+  },
 ]
 
 const router = createRouter({
