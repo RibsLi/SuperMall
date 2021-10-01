@@ -38,17 +38,21 @@ export default {
       },
     },
   },
-  filters: {
-    showData(value) {
-      // 1、将时间戳转成data对象
-      const data = new Date(value * 1000);
-      // 2、格式化data
-      return formatDate(data,'yyyy-MM-dd hh:mm:ss');
-    },
-  },
+  // vue3过滤器已废除，改用计算属性或者方法
+  // filters: {
+  //   showData(value) {
+  //     // 1、将时间戳转成data对象
+  //     const data = new Date(value * 1000);
+  //     // 2、格式化data
+  //     return formatDate(data,'yyyy-MM-dd hh:mm:ss');
+  //   },
+  // },
+  
+  //时间戳
   computed: {
     commentData() {
-      return this.commentInfo.created
+      const data = new Date(this.commentInfo.created * 1000);
+      return formatDate(data,'yyyy-MM-dd hh:mm:ss')
     }
   }
 };
