@@ -8,6 +8,7 @@
       <detail-param-info :param-info="paramInfo"></detail-param-info>
       <detail-goods-info :detail-info="detailInfo"></detail-goods-info>
       <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
+      <goods-list :goods="recommends"></goods-list>
     </scroll>
   </div>
 </template>
@@ -21,8 +22,9 @@ import Scroll from 'components/common/scroll/Scroll'
 import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailParamInfo from './childComps/DetailParamInfo'
 import DetailCommentInfo from './childComps/DetailCommentInfo'
+import GoodsList from 'components/content/goods/GoodsList'
 
-import {getDetail, Goods, Shop, GoodsParam} from 'network/detail'
+import {getDetail, Goods, Shop, GoodsParam, getRecommend} from 'network/detail'
 
 export default {
   name: "Detail",
@@ -34,7 +36,8 @@ export default {
     Scroll,
     DetailGoodsInfo,
     DetailParamInfo,
-    DetailCommentInfo
+    DetailCommentInfo,
+    GoodsList
   },
   data() {
     return {
@@ -44,7 +47,8 @@ export default {
       shop: {},
       detailInfo: {},
       paramInfo: {},
-      commentInfo: {}
+      commentInfo: {},
+      recommends: []
     }
   },
   created() {
@@ -52,7 +56,7 @@ export default {
     this.iid = this.$route.params.iid
     //根据iid获取数据
     getDetail(this.iid).then(res => {
-      console.log(res);
+      // console.log(res);
       const data = res.data.result
       this.topImg = data.itemInfo.topImages
       //获取商品信息
@@ -67,6 +71,11 @@ export default {
       if( data.rate.cRate !== 0) {
         this.commentInfo = data.rate.list[0]
       }
+    })
+    // 详情页推荐商品
+    getRecommend().then(res => {
+      // console.log(res);
+      this.recommends = res.data.data.list
     })
   },
   

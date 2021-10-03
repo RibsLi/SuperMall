@@ -9,11 +9,7 @@ export function getDetail(iid) {
   })
 }
 
-export function getRecommend() {
-  return request({
-    url: '/recommend'
-  })
-}
+
 
 // 商品信息
 export class Goods {
@@ -53,4 +49,12 @@ export class GoodsParam {
       this.sizes = rule.tables;
     }
   }
+}
+
+
+//详情页推荐商品
+export function getRecommend() {
+  return request({
+    url: '/recommend'
+  })
 }
