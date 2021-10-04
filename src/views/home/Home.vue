@@ -98,7 +98,7 @@
       },
       //请求商品数据
       getHomeGoods(type) {
-        // [type]是因为他是变了所以不能写成.type
+        // [type]是因为他是变量所以不能写成.type
         const page = this.goods[type].page +1
         getHomeGoods(type, page).then(res => {
           // console.log(res);

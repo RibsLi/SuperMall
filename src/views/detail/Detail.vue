@@ -1,14 +1,14 @@
 <template>
   <div class="detail">
-    <detail-nav-bar class="detail-nav"></detail-nav-bar>
-    <scroll class="content">
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick"></detail-nav-bar>
+    <scroll class="content" ref="scroll">
       <detail-swiper :top-img="topImg"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
-      <detail-param-info :param-info="paramInfo"></detail-param-info>
+      <detail-param-info :param-info="paramInfo" ref="params"></detail-param-info>
       <detail-goods-info :detail-info="detailInfo"></detail-goods-info>
-      <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
-      <goods-list :goods="recommends"></goods-list>
+      <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
+      <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
   </div>
 </template>
@@ -48,7 +48,8 @@ export default {
       detailInfo: {},
       paramInfo: {},
       commentInfo: {},
-      recommends: []
+      recommends: [],
+      themeTopYs: []
     }
   },
   created() {
@@ -71,12 +72,27 @@ export default {
       if( data.rate.cRate !== 0) {
         this.commentInfo = data.rate.list[0]
       }
+      //详情页导航点击事件
+      this.$nextTick(() => {
+        this.themeTopYs = []
+        this.themeTopYs.push(0)
+        this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+        this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+  
+        // console.log(this.themeTopYs);
+      })
     })
     // 详情页推荐商品
     getRecommend().then(res => {
       // console.log(res);
       this.recommends = res.data.data.list
     })
+  },
+  methods: {
+    titleClick(index) {
+      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 200)
+    }
   },
   
 }
