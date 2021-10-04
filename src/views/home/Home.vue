@@ -78,6 +78,7 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
+
     },
     activated() {
       this.$refs.scroll.scrollTo(0 , this.saveY, 0)

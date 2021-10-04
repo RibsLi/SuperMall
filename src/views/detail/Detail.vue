@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick"></detail-nav-bar>
-    <scroll class="content" ref="scroll">
+    <scroll class="content" ref="scroll" :pull-up-load="true">
       <detail-swiper :top-img="topImg"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
@@ -111,6 +111,11 @@ export default {
   background-color: #fff;
 }
 .content {
-  height: calc(100% - 44px);
+  position: absolute;
+  top: 44px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
 }
 </style>
