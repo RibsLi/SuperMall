@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav"></detail-nav-bar>
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="navBar"></detail-nav-bar>
     <scroll class="content" ref="scroll" :pull-up-load="true" @scroll="contentScroll" :probe-type="3">
       <detail-swiper :top-img="topImg"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
@@ -61,7 +61,7 @@ export default {
       themeTopYs: [],
       getThemeTopYs: null,
       currentIndex: 0,
-      isShowBackTop: false
+      isShowBackTop: false,
     }
   },
   created() {
@@ -120,14 +120,17 @@ export default {
       for(let i = 0; i < length - 1; i++) {
         if(this.currentIndex !== i && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) {
           this.currentIndex = i
-          this.$refs.nav.currentIndex = this.currentIndex
+          this.$refs.navBar.currentIndex = this.currentIndex
+          // 解决currentindex报错问题
+          this.currentIndex = 0
         }
+        
 
         // // 条件一防止频繁赋值，条件二判断i在0和length-1之间，条件三判断i大于length-1
         // if(this.currentIndex !== i && (i < length - 1 && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) || (i === length - 1 && positionY >= this.themeTopYs[i])) {
         //   this.currentIndex = i
         //   // console.log(this.currentIndex);
-        //   this.$refs.nav.currentIndex = this.currentIndex
+        //   this.$refs.navBar.currentIndex = this.currentIndex
         // }
       }
       this.isShowBackTop = (-createpositon.y) > 800
