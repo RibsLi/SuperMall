@@ -57,6 +57,9 @@ export default {
     scrollTo(x, y, time=300) {
       this.scroll.scrollTo(x, y, time)
     },
+    refresh() {
+      this.scroll && this.scroll.refresh()
+    },
     //结束上拉加载
     finishPullUp() {
       this.scroll.finishPullUp()

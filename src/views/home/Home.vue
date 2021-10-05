@@ -81,7 +81,8 @@
 
     },
     activated() {
-      this.$refs.scroll.scrollTo(0 , this.saveY, 0)
+      this.$refs.scroll.refresh()
+      this.$refs.scroll.scrollTo(0, this.saveY, 0)
     },
     deactivated() {
       //切换组件时保存当前位置

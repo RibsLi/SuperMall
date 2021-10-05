@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
-    <detail-nav-bar class="detail-nav" @titleClick="titleClick"></detail-nav-bar>
-    <scroll class="content" ref="scroll" :pull-up-load="true">
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav"></detail-nav-bar>
+    <scroll class="content" ref="scroll" :pull-up-load="true" @scroll="contentScroll" :probe-type="3">
       <detail-swiper :top-img="topImg"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
@@ -10,6 +10,8 @@
       <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
+    <detail-bottom-bar></detail-bottom-bar>
+    <back-top @click.native="backTopClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -23,9 +25,12 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailParamInfo from './childComps/DetailParamInfo'
 import DetailCommentInfo from './childComps/DetailCommentInfo'
 import GoodsList from 'components/content/goods/GoodsList'
+import DetailBottomBar from './childComps/DetailBottomBar'
+// import BackTop from 'components/content/backTop/BackTop'
 
 import {getDetail, Goods, Shop, GoodsParam, getRecommend} from 'network/detail'
 import { debounce } from "common/utils";
+import { backTopMixin } from "common/mixin";
 
 export default {
   name: "Detail",
@@ -38,8 +43,11 @@ export default {
     DetailGoodsInfo,
     DetailParamInfo,
     DetailCommentInfo,
-    GoodsList
+    GoodsList,
+    DetailBottomBar,
+    // BackTop
   },
+  mixins: [backTopMixin],
   data() {
     return {
       iid: null,
@@ -51,7 +59,9 @@ export default {
       commentInfo: {},
       recommends: [],
       themeTopYs: [],
-      getThemeTopYs: null
+      getThemeTopYs: null,
+      currentIndex: 0,
+      isShowBackTop: false
     }
   },
   created() {
@@ -89,6 +99,7 @@ export default {
       this.themeTopYs.push(this.$refs.params.$el.offsetTop)
       this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
       this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+      this.themeTopYs.push(Number.MAX_VALUE)
       // console.log(this.themeTopYs);
     })
   },
@@ -96,10 +107,35 @@ export default {
     titleClick(index) {
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 200)
     },
+    //监听图片加载完成
     detailImagLoad() {
       //详情页导航点击事件
       this.getThemeTopYs()
-    }
+    },
+    // 监听scroll完成滚动详情页跳转导航
+    contentScroll(createpositon) {
+      // console.log(position);
+      const positionY = -createpositon.y
+      const length = this.themeTopYs.length
+      for(let i = 0; i < length - 1; i++) {
+        if(this.currentIndex !== i && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) {
+          this.currentIndex = i
+          this.$refs.nav.currentIndex = this.currentIndex
+        }
+
+        // // 条件一防止频繁赋值，条件二判断i在0和length-1之间，条件三判断i大于length-1
+        // if(this.currentIndex !== i && (i < length - 1 && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) || (i === length - 1 && positionY >= this.themeTopYs[i])) {
+        //   this.currentIndex = i
+        //   // console.log(this.currentIndex);
+        //   this.$refs.nav.currentIndex = this.currentIndex
+        // }
+      }
+      this.isShowBackTop = (-createpositon.y) > 800
+    },
+    // 返回顶部
+    backTopClick() {
+      this.$refs.scroll.scrollTo(0, 0)
+    },
   },
   
 }
@@ -120,7 +156,7 @@ export default {
 .content {
   position: absolute;
   top: 44px;
-  bottom: 0;
+  bottom: 49px;
   left: 0;
   right: 0;
   overflow: hidden;
