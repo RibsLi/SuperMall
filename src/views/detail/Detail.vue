@@ -10,7 +10,7 @@
       <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
     <back-top @click.native="backTopClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
@@ -139,6 +139,19 @@ export default {
     backTopClick() {
       this.$refs.scroll.scrollTo(0, 0)
     },
+    //加入购物车
+    addToCart() {
+      const product = {}
+      product.img = this.topImg[0]
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this.goods.realPrice
+      product.iid = this.iid
+      product.shopName = this.shop.name
+      product.count = 1
+      
+      this.$store.dispatch('addCart', product)
+    }
   },
   
 }
