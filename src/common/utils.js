@@ -1,3 +1,23 @@
+/**
+ * 防抖函数(控制一些函数执行的次数)
+ * 如获取加载图片是否完成的函数没次请求会被执行30次，消耗性能
+ */
+ export function debounce(func, delay = 50) {
+  let timer = null;
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay)
+  }
+}
+
+
+
+// 格式化日期
+
 export function formatDate(date, fmt) {
   // 1.获取年份
   // Y+ 正则表达式规则 

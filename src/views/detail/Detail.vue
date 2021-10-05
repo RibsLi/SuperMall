@@ -6,7 +6,7 @@
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-param-info :param-info="paramInfo" ref="params"></detail-param-info>
-      <detail-goods-info :detail-info="detailInfo"></detail-goods-info>
+      <detail-goods-info :detail-info="detailInfo" @detailImagLoad="detailImagLoad"></detail-goods-info>
       <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
@@ -25,6 +25,7 @@ import DetailCommentInfo from './childComps/DetailCommentInfo'
 import GoodsList from 'components/content/goods/GoodsList'
 
 import {getDetail, Goods, Shop, GoodsParam, getRecommend} from 'network/detail'
+import { debounce } from "common/utils";
 
 export default {
   name: "Detail",
@@ -49,7 +50,8 @@ export default {
       paramInfo: {},
       commentInfo: {},
       recommends: [],
-      themeTopYs: []
+      themeTopYs: [],
+      getThemeTopYs: null
     }
   },
   created() {
@@ -72,26 +74,31 @@ export default {
       if( data.rate.cRate !== 0) {
         this.commentInfo = data.rate.list[0]
       }
-      //详情页导航点击事件
-      this.$nextTick(() => {
-        this.themeTopYs = []
-        this.themeTopYs.push(0)
-        this.themeTopYs.push(this.$refs.params.$el.offsetTop)
-        this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
-        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
-  
-        // console.log(this.themeTopYs);
-      })
+      
     })
     // 详情页推荐商品
     getRecommend().then(res => {
       // console.log(res);
       this.recommends = res.data.data.list
+    }),
+    // 详情页防抖
+    this.getThemeTopYs = debounce(() => {
+      // console.log('---');
+      this.themeTopYs = []
+      this.themeTopYs.push(0)
+      this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+      this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+      // console.log(this.themeTopYs);
     })
   },
   methods: {
     titleClick(index) {
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 200)
+    },
+    detailImagLoad() {
+      //详情页导航点击事件
+      this.getThemeTopYs()
     }
   },
   
