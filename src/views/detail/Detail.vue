@@ -27,6 +27,7 @@
   import GoodsList from 'components/content/goods/GoodsList'
   import DetailBottomBar from './childComps/DetailBottomBar'
   // import BackTop from 'components/content/backTop/BackTop'
+  // import Toast from 'components/common/toast/Toast'
 
   import { getDetail, Goods, Shop, GoodsParam, getRecommend } from 'network/detail'
   import { debounce } from "common/utils";
@@ -45,6 +46,7 @@
       DetailCommentInfo,
       GoodsList,
       DetailBottomBar,
+      // Toast
       // BackTop
     },
     mixins: [backTopMixin],
@@ -62,6 +64,8 @@
         getThemeTopYs: null,
         currentIndex: 0,
         isShowBackTop: false,
+        message: '',
+        isShow: false
       }
     },
 
@@ -152,7 +156,10 @@
         product.shopName = this.shop.name
         product.count = 1
         
-        this.$store.dispatch('addCart', product)
+        this.$store.dispatch('addCart', product).then(res => {
+          console.log(res);
+          // this.$toast.show(res, 1000)
+        })
       }
     },
     

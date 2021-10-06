@@ -42,7 +42,7 @@
         <img src="~assets/img/tabbar/icon04_active.png" alt="">
       </template>
       <template v-slot:item-text>
-        <div>个人</div>
+        <div>我的</div>
       </template>
     </tab-bar-item>
   </tab-bar>
