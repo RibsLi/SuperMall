@@ -27,12 +27,12 @@ export default {
 </script>
 
 <style scoped>
-.detail-swiper {
-  height: 300px;
-  overflow: hidden;
-}
-.detail-swiper img {
-  height: 100%;
-  width: 100%;
-}
+  .detail-swiper {
+    height: 300px;
+    overflow: hidden;
+  }
+  .detail-swiper img {
+    height: 100%;
+    width: 100%;
+  }
 </style>

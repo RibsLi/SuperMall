@@ -4,21 +4,21 @@
       <template v-slot:center>购物街</template>
     </nav-bar>
     <!-- 吸顶效果 -->
-    <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl1" v-show="isTabFixed"></tab-control>
+    <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl1" v-show="isTabFixed"/>
     <!-- 滚动条 -->
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp="loadMore">
       <!-- 轮播图 -->
-      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"></home-swiper>
+      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"/>
       <!-- 推荐 -->
-      <recommend-view :recommends="recommends"></recommend-view>
+      <recommend-view :recommends="recommends"/>
       <!-- 本周流行 -->
-      <feature-view></feature-view>
+      <feature-view/>
       <!-- 小导航 -->
-      <tab-control :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"></tab-control>
+      <tab-control :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"/>
       <!-- 商品列表 -->
-      <goods-list :goods="showGoods"></goods-list>
+      <goods-list :goods="showGoods"/>
     </scroll>
-    <back-top @click.native="backTopClick" v-show="isShowBackTop"></back-top>
+    <back-top @click.native="backTopClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
@@ -71,6 +71,7 @@
         saveY: 0
       }
     },
+
     created() {//created里面的方法都封装到了methods里面
       //请求banner数据
       this.getHomeMultidata()
@@ -80,15 +81,18 @@
       this.getHomeGoods('sell')
 
     },
+    
     activated() {
       this.$refs.scroll.refresh()
       this.$refs.scroll.scrollTo(0, this.saveY, 0)
     },
+
     deactivated() {
       //切换组件时保存当前位置
       this.saveY = this.$refs.scroll.getScrollY()
       // console.log(this.$refs.scroll.scroll.y);
     },
+
     methods: {
       //请求banner数据
       getHomeMultidata() {
@@ -152,6 +156,7 @@
       }
       
     },
+    
     computed: {
       //显示商品
       showGoods() {

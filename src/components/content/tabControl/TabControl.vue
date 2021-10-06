@@ -40,15 +40,12 @@
     line-height: 40px;
     background-color: #fff;
   }
-
   .tab-control-item {
     flex: 1;
   }
-
   .active {
     color: var(--color-high-text);
   }
-
   .active span {
     padding: 5px;
     border-bottom: 2px solid var(--color-tint);
