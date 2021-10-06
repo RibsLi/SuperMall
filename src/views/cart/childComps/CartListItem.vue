@@ -1,9 +1,7 @@
 <template>
   <div id="shopping-cart-list-item">
     <div class="item-selector">
-      <check-button
-        :is-checked="product.checked"
-        @click.native="checkButtonClick" />
+      <check-button :is-checked="product.checked" @click.native="checkButtonClick" />
     </div>
 
     <div class="item-img">
@@ -18,14 +16,13 @@
 
       <div class="item-msg">{{ product.title }}</div>
       <div class="item-desc">{{ product.desc }}</div>
-      <!-- <div class="item-msg">颜色：{{product.productStyleMsg}}，&nbsp;尺码：{{product.productSizeMsg}}</div> -->
 
       <div class="info-bottom">
         <div class="item-price left">¥{{ product.price }}</div>
         <div class="item-count right">
-          <div @click="reduce">－</div>
+          <div @click="decrement">－</div>
           <div>{{ product.count }}</div>
-          <div @click="add">＋</div>
+          <div @click="increment">＋</div>
         </div>
       </div>
     </div>
@@ -53,20 +50,14 @@
       checkButtonClick() {
         this.product.checked = !this.product.checked;
       },
-      reduce() {
-        if (this.product.count === 1) {
-          this.$toast.show("不能再减了~");
-        } else {
-          this.shopReduce(this.product);
+      decrement() {
+        if(this.product.count > 1){
+          this.product.count--
         }
       },
-      add() {
-        if (this.product.count >= 10) {
-          this.$toast.show("限购十件~");
-        } else {
-          this.shopAdd(this.product);
-        }
-      },
+      increment() {
+        this.product.count++
+      }
     },
 
     computed: {
@@ -156,10 +147,11 @@
 
   .info-bottom .item-price {
     color: orangered;
+    margin-top: 3px;
   }
 
   .item-count {
-    margin-top: 10px;
+    margin-right: 5px;
     display: flex;
     text-align: center;
     height: 25px;

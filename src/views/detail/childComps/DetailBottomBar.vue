@@ -88,10 +88,10 @@
     align-items: center;
   }
   .cart-and-buy {
-    height: 35px;
-    width: 80px;
-    line-height: 35px;
-    font-size: 13px;
+    height: 40px;
+    width: 88px;
+    line-height: 40px;
+    font-size: 14px;
     color: white;
     font-weight: 500;
   }

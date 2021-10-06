@@ -1,5 +1,10 @@
 @import "./normalize.css";
 
+* {
+  touch-action: pan-y;
+}
+
+
 :root {
   --color-text: #666;
   --color-high-text: #ff5777;

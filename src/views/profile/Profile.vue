@@ -5,15 +5,17 @@
         个人中心
       </template>
     </nav-bar>
-    <user-info/>
-    <account-info/>
-    <normal-list-view/>
-    <!-- <normal-list-view /> -->
+    <scroll class="content" :pull-up-load="true">
+      <user-info/>
+      <account-info/>
+      <normal-list-view/>
+    </scroll>
   </div>
 </template>
 
 <script>
   import NavBar from "components/common/navbar/NavBar";
+  import Scroll from 'components/common/scroll/Scroll'
 
   import UserInfo from "./childComponents/UserInfo";
   import AccountInfo from "./childComponents/AccountInfo";
@@ -23,6 +25,7 @@
     name: "Profile",
     components: {
       NavBar,
+      Scroll,
       UserInfo,
       AccountInfo,
       NormalListView,
@@ -37,5 +40,13 @@
   .nav-bar {
     background-color: var(--color-tint);
     color: #fff;
+  }
+  .content {
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
   }
 </style>
