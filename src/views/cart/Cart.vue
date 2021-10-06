@@ -11,7 +11,7 @@
 
     <cart-list/>
 
-    <cart-bottom-bar/>
+    <cart-bottom-bar :operation="operation"/>
   </div>
 </template>
 

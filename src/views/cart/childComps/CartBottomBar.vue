@@ -5,7 +5,7 @@
       <span>全选</span>
     </div>
 
-    <div v-show="!isModify" class="bottom-menu">
+    <div v-show="operation" class="bottom-menu">
       <div class="cart-total">
         合计:
         <span class="total-price">{{ totalPrice }}</span>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div v-show="isModify" @click="deleteShop">
+    <div v-show="!operation" @click="deleteShop">
       <span class="bottom-delete"> 删除 </span>
     </div>
   </div>
@@ -36,7 +36,7 @@
       CheckButton,
     },
     props: {
-      isModify: {
+      operation: {
         type: Boolean,
         default: false,
       },
@@ -56,7 +56,7 @@
       // 结算
       submit() {
         if (this.checkLength === 0) {
-          
+
           // this.$toast.show("请选择宝贝哦~");
         } else {
           // this.$toast.show("请稍等", 400, true);
@@ -64,7 +64,7 @@
       },
       //删除
       deleteShop() {
-        console.log('删除');
+        this.$store.state.cartList.pop()
       },
     },
     
@@ -165,19 +165,9 @@
     color: #fc0a0a;
     border: 1px solid #fc0a0a;
     font-size: 15px;
-    line-height: 15px;
     padding: 6px 15px;
     text-align: center;
     border-radius: 80px;
     white-space: nowrap;
-    margin-left: 10px;
-  }
-  .overlay-alert {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
   }
 </style>

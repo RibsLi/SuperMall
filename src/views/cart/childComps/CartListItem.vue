@@ -19,11 +19,15 @@
 
       <div class="info-bottom">
         <div class="item-price left">¥{{ product.price }}</div>
+
         <div class="item-count right">
           <div @click="decrement">－</div>
           <div>{{ product.count }}</div>
           <div @click="increment">＋</div>
         </div>
+        <!-- <div v-show="!operation" class="bottom-delete" @click="deleteShop">
+          删除
+        </div> -->
       </div>
     </div>
   </div>
@@ -57,6 +61,9 @@
       },
       increment() {
         this.product.count++
+      },
+      deleteShop() {
+        this.$store.state.cartList.delete()
       }
     },
 
@@ -147,11 +154,11 @@
 
   .info-bottom .item-price {
     color: orangered;
-    margin-top: 3px;
+    margin-top: 13px;
   }
 
   .item-count {
-    margin-right: 5px;
+    margin: 10px 18px 0 0;
     display: flex;
     text-align: center;
     height: 25px;
@@ -179,4 +186,13 @@
     border-right: none;
     border-left: none;
   }
+  /* .bottom-delete {
+    color: #fc0a0a;
+    border: 1px solid #fc0a0a;
+    font-size: 14px;
+    padding: 4px 15px;
+    text-align: center;
+    border-radius: 80px;
+    margin: 9px 18px 0 0;
+  } */
 </style>

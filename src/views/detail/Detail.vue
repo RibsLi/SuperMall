@@ -9,10 +9,10 @@
       <detail-goods-info :detail-info="detailInfo" @detailImagLoad="detailImagLoad"/>
       <detail-comment-info :comment-info="commentInfo" ref="comment"/>
       <goods-list :goods="recommends" ref="recommend"/>
+      <detail-base-line/>
     </scroll>
     <detail-bottom-bar @addToCart="addToCart"/>
     <back-top @click.native="backTopClick" v-show="isShowBackTop"/>
-    <toast :message="message"/>
   </div>
 </template>
 
@@ -28,7 +28,8 @@
   import GoodsList from 'components/content/goods/GoodsList'
   import DetailBottomBar from './childComps/DetailBottomBar'
   // import BackTop from 'components/content/backTop/BackTop'
-  import Toast from 'components/common/toast/Toast'
+  import DetailBaseLine from "./childComps/DetailBaseLine"
+  // import Toast from 'components/common/toast/Toast'
 
   import { getDetail, Goods, Shop, GoodsParam, getRecommend } from 'network/detail'
   import { debounce } from "common/utils";
@@ -47,7 +48,8 @@
       DetailCommentInfo,
       GoodsList,
       DetailBottomBar,
-      Toast
+      DetailBaseLine,
+      // Toast,
       // BackTop
     },
     mixins: [backTopMixin],

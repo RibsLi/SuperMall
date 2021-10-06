@@ -1,7 +1,7 @@
 <template>
   <div class="cart-list">
     <scroll class="content" :pull-up-load="true" ref="scroll">
-      <cart-list-item v-for="(item, index) in $store.state.cartList" :product="item"></cart-list-item>
+      <cart-list-item v-for="(item, index) in $store.state.cartList" :product="item"/>
     </scroll>
   </div>
 </template>
