@@ -1,6 +1,6 @@
 <template>
   <div class="category-list">
-    <div class="list-item" v-for="(item, index) in category" @click="itemClick(index)" :class="{active:currentIndex === index}">
+    <div class="list-item" v-for="(item, index) in list" @click="itemClick(index)" :class="{active:currentIndex === index}">
       {{item}}
     </div>
   </div>
@@ -9,17 +9,21 @@
 <script>
   export default {
     name: "CategoryList",
-    data() {
-      return {
-        category: ['正在流行', '男装', '女装', '裙子', '内衣', '男鞋', '女鞋', '包包', '数码', '电脑', '运动', '配饰', '美妆', '个护', '家居'],
-        currentIndex: 0
+    props: {
+      list: Array,
+      default() {
+        return []
       }
     },
-    components: {
+    data() {
+      return {
+        currentIndex: 0
+      }
     },
     methods: {
       itemClick(index) {
         this.currentIndex = index
+        this.$emit('categoryClick', index)
       }
     },
   }
