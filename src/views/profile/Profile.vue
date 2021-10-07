@@ -17,9 +17,9 @@
   import NavBar from "components/common/navbar/NavBar";
   import Scroll from 'components/common/scroll/Scroll'
 
-  import UserInfo from "./childComponents/UserInfo";
-  import AccountInfo from "./childComponents/AccountInfo";
-  import NormalListView from "./childComponents/NormalListView";
+  import UserInfo from "./childComps/UserInfo";
+  import AccountInfo from "./childComps/AccountInfo";
+  import NormalListView from "./childComps/NormalListView";
 
   export default {
     name: "Profile",

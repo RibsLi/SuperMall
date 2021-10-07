@@ -2,7 +2,7 @@
   <div class="user-info">
     <img class="avatar" src="~assets/img/profile/avatar.svg" alt=""/>
     <div class="info">
-      <div class="login">登录/注册</div>
+      <div class="login" @click="loginClick">登录/注册</div>
       <div class="phone">
         <img src="~assets/img/profile/phone.svg" alt=""/>
         <span>暂无绑定手机号</span>
@@ -16,7 +16,12 @@
 
 <script>
   export default {
-    name: "UserInfo"
+    name: "UserInfo",
+    methods: {
+      loginClick() {
+        this.$router.push('/login')
+      }
+    },
   };
 </script>
 

@@ -1,36 +1,45 @@
 <template>
-  <div>分类</div>
-  <div class="wrapper">
+  <div id="category">
+    <nav-bar class="nav-bar">
+      <template v-slot:center>商品分类</template>
+    </nav-bar>
+    <scroll class="content" :pull-up-load="true">
+      <category-list/>
+    </scroll>
   </div>
 </template>
 
 <script>
-// import BScroll from 'better-scroll'
+  import NavBar from 'components/common/navbar/NavBar'
+  import Scroll from 'components/common/scroll/Scroll'
+  import BackTop from 'components/content/backTop/BackTop'
 
-//   export default {
-//     name: "Category",
-//     data() {
-//       return {
-//         scroll: null
-//       }
-//     },
-//     mounted() {
-//       this.scroll = new BScroll(document.querySelector('.wrapper'), {
-//         probeType: 3,
-//         pullUpLoad: true
-//       })
-//       this.scroll.on('scroll', (CaretPosition) => {
-//         // console.log(CaretPosition);
-//       })
-//       this.scroll.on('pullingUp', () => {
-//         console.log('more');
-//       })
-//     },
-//   }
+  import CategoryList from './childComps/CategoryList'
+
+  
+
+  export default {
+    name: "Category",
+    components: {
+      NavBar,
+      Scroll,
+      CategoryList
+    }
+  }
+
 </script>
 
 <style scoped>
-.wrapper {
-  height: 300px;
-}
+  .nav-bar {
+    color: #fff;
+    background-color: var(--color-tint);
+  }
+  .content {
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
 </style>
