@@ -13,7 +13,10 @@
     </scroll>
     <detail-bottom-bar @addToCart="addToCart"/>
     <back-top @click.native="backTopClick" v-show="isShowBackTop"/>
-    <toast :message="message"/>
+    <!-- <toast :message="message"/> -->
+    <div class="toast" v-show="isShow">
+      加入购物车成功
+    </div>
   </div>
 </template>
 
@@ -30,7 +33,7 @@
   import DetailBottomBar from './childComps/DetailBottomBar'
   // import BackTop from 'components/content/backTop/BackTop'
   import DetailBaseLine from "./childComps/DetailBaseLine"
-  import Toast from 'components/common/toast/Toast'
+  // import Toast from 'components/common/toast/Toast'
 
   import { getDetail, Goods, Shop, GoodsParam, getRecommend } from 'network/detail'
   import { debounce } from "common/utils";
@@ -50,7 +53,7 @@
       GoodsList,
       DetailBottomBar,
       DetailBaseLine,
-      Toast,
+      // Toast,
       // BackTop
     },
     mixins: [backTopMixin],
@@ -162,10 +165,14 @@
         
         this.$store.dispatch('addCart', product).then(res => {
           // console.log(res);
-          this.message = res
+          // this.message = res
           
           // this.$toast.show(res, 1000)
         })
+        this.isShow = true
+        setTimeout(() => {
+          this.isShow = false
+        }, 1000);
       }
     },
     
@@ -191,5 +198,25 @@
     left: 0;
     right: 0;
     overflow: hidden;
+  }
+  .toast {
+    position: fixed;
+    z-index: 999999;
+    left: 50%;
+    top: 45%;
+    transition: all 0.5s;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(17, 17, 17, 0.5);
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    max-width: 200px;
   }
 </style>

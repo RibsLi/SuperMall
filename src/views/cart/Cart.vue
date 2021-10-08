@@ -11,7 +11,13 @@
 
     <cart-list/>
 
-    <cart-bottom-bar :operation="operation"/>
+    <cart-bottom-bar :operation="operation" @goShoping="goShoping" @showLoadding="showLoadding"/>
+
+    <div class="goShoping" v-show="isShoping">先去选购一些东西吧</div>
+    <div class="loadding" v-show="loadding">
+      <img src="~assets/img/cart/loadding.gif" alt="">
+      <div>请稍等···</div>
+    </div>
   </div>
 </template>
 
@@ -26,7 +32,9 @@
     name: "Cart",
     data() {
       return {
-        operation: true
+        operation: true,
+        isShoping: false,
+        loadding: false
       }
     },
     components: {
@@ -42,11 +50,23 @@
       // ...mapGetters(['cartLength', 'cartList'])
       operations() {
         return this.operation ? '管理' : '完成'
-      }
+      },
     },
     methods: {
       modify() {
         this.operation = !this.operation
+      },
+      goShoping() {
+        this.isShoping = true
+        setTimeout(() => {
+          this.isShoping = false
+        }, 1000);
+      },
+      showLoadding() {
+        this.loadding = true
+        setTimeout(() => {
+          this.loadding = false
+        }, 1000);
       }
     },
   }
@@ -59,5 +79,37 @@
   .nav-bar {
     background-color: var(--color-tint);
     color: #fff;
+  }
+  .goShoping {
+    position: fixed;
+    z-index: 999999;
+    left: 50%;
+    top: 45%;
+    transition: all 0.5s;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(17, 17, 17, 0.5);
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    max-width: 200px;
+  }
+  .loadding {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -25px;
+    margin-top: -50px;
+  }
+  .loadding img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 3px;
   }
 </style>

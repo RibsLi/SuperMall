@@ -56,10 +56,9 @@
       // 结算
       submit() {
         if (this.checkLength === 0) {
-
-          // this.$toast.show("请选择宝贝哦~");
+          this.$emit('goShoping')
         } else {
-          // this.$toast.show("请稍等", 400, true);
+          this.$emit('showLoadding')
         }
       },
       //删除
