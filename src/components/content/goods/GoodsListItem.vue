@@ -28,7 +28,13 @@
     methods: {
       goodsItemClick() {
         //获取商品id
-        this.$router.push("/detail/" + this.goodsItem.iid);
+        // this.$router.push("/detail/" + this.goodsItem.iid);
+        this.$router.push({
+          path: '/detail',
+          query: {
+            iid: this.goodsItem.iid
+          }
+        })
         
       },
     },
