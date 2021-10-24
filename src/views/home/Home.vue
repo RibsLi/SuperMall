@@ -133,8 +133,8 @@
         this.$refs.tabControl2.currentIndex = index
         // 解决tabcontrol下拉后其他tabcontrol也有被下拉的问题
         this.saveY = this.$refs.scroll.getScrollY()
-        if (-this.saveY > this.tabOffsetTop) {
-          this.$refs.scroll.scrollTo(0, -this.tabOffsetTop, 0)
+        if ( -this.saveY > this.tabOffsetTop ) {
+          this.$refs.scroll.scrollTo(0, -this.tabOffsetTop, 0) 
         }
       },
       // 返回顶部
