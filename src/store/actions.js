@@ -8,18 +8,18 @@ export default {
     // }
     return new Promise((resolve, reject) => {
       let oldProduct = context.state.cartList.find(function(item) {
-        return item.iid === payload.iid
-      })
-      if(oldProduct) {
+        return item.iid === payload.iid;
+      });
+      if (oldProduct) {
         // oldProduct.count += 1
-        context.commit('addCounter', oldProduct)
-        resolve('加入购物车成功')
+        context.commit("addCounter", oldProduct);
+        resolve("加入购物车成功");
       } else {
-        payload.count = 1
+        payload.count = 1;
         // state.cartList.push(payload)
-        context.commit('addToCart', payload)
-        resolve('加入购物车成功')
+        context.commit("addToCart", payload);
+        resolve("加入购物车成功");
       }
-    })
+    });
   }
-}
+};

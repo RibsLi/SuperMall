@@ -1,7 +1,10 @@
 <template>
   <div id="shopping-cart-list-item">
     <div class="item-selector">
-      <check-button :is-checked="product.checked" @click.native="checkButtonClick" />
+      <check-button
+        :is-checked="product.checked"
+        @click.native="checkButtonClick"
+      />
     </div>
 
     <div class="item-img">
@@ -34,159 +37,159 @@
 </template>
 
 <script>
-  import CheckButton from "components/content/checkbutton/CheckButton";
+import CheckButton from "components/content/checkbutton/CheckButton";
 
-  export default {
-    name: "CartListItem",
-    components: {
-      CheckButton
-    },
-    props: {
-      product: {
-        type: Object,
-        default() {
-          return {};
-        },
+export default {
+  name: "CartListItem",
+  components: {
+    CheckButton,
+  },
+  props: {
+    product: {
+      type: Object,
+      default() {
+        return {};
       },
     },
+  },
 
-    methods: {
-      checkButtonClick() {
-        this.product.checked = !this.product.checked;
-      },
-      decrement() {
-        if(this.product.count > 1){
-          this.product.count--
-        }
-      },
-      increment() {
-        this.product.count++
-      },
-      deleteShop() {
-        this.$store.state.cartList.delete()
+  methods: {
+    checkButtonClick() {
+      this.product.checked = !this.product.checked;
+    },
+    decrement() {
+      if (this.product.count > 1) {
+        this.product.count--;
       }
     },
-
-    computed: {
-      price() {
-        return (this.product.price * this.product.count).toFixed(2);
-      },
+    increment() {
+      this.product.count++;
     },
-  };
+    deleteShop() {
+      this.$store.state.cartList.delete();
+    },
+  },
+
+  computed: {
+    price() {
+      return (this.product.price * this.product.count).toFixed(2);
+    },
+  },
+};
 </script>
 
 <style scoped>
-  #shopping-cart-list-item {
-    width: 100%;
-    display: flex;
-    font-size: 0;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
+#shopping-cart-list-item {
+  width: 100%;
+  display: flex;
+  font-size: 0;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
 
-  .item-selector {
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.item-selector {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .item-name img {
-    width: 20px;
-    height: 20px;
-    vertical-align: text-bottom;
-  }
+.item-name img {
+  width: 20px;
+  height: 20px;
+  vertical-align: text-bottom;
+}
 
-  .item-name,
-  .item-desc {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+.item-name,
+.item-desc {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
-  .item-desc {
-    text-align: left;
-  }
+.item-desc {
+  text-align: left;
+}
 
-  .item-msg {
-    text-align: left;
-    color: var(--color-high-text);
-    font-size: 13px;
-    margin-top: 7px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+.item-msg {
+  text-align: left;
+  color: var(--color-high-text);
+  font-size: 13px;
+  margin-top: 7px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
-  .item-img {
-    padding: 5px;
-  }
+.item-img {
+  padding: 5px;
+}
 
-  .item-img img {
-    width: 80px;
-    height: 110px;
-    display: block;
-    border-radius: 5px;
-  }
+.item-img img {
+  width: 80px;
+  height: 110px;
+  display: block;
+  border-radius: 5px;
+}
 
-  .item-info {
-    width: 100%;
-    text-align: center;
-    font-size: 17px;
-    color: #333;
-    padding: 5px 10px;
-    position: relative;
-    overflow: hidden;
-  }
+.item-info {
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  color: #333;
+  padding: 5px 10px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .item-info .item-desc {
-    font-size: 14px;
-    color: #666;
-    margin-top: 7px;
-  }
+.item-info .item-desc {
+  font-size: 14px;
+  color: #666;
+  margin-top: 7px;
+}
 
-  .info-bottom {
-    margin-top: 7px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.info-bottom {
+  margin-top: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .info-bottom .item-price {
-    color: orangered;
-    margin-top: 13px;
-  }
+.info-bottom .item-price {
+  color: orangered;
+  margin-top: 13px;
+}
 
-  .item-count {
-    margin: 10px 18px 0 0;
-    display: flex;
-    text-align: center;
-    height: 25px;
-    width: auto;
-  }
-  .item-count div {
-    height: 23px;
-    line-height: 23px;
-    outline: none;
-    background-color: #fff;
-    border: none;
-    border: 1px solid rgba(0, 0, 0, 0.7);
-    border-collapse: collapse;
-    width: 30px;
-  }
-  .item-count div:last-child {
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-  .item-count div:first-child {
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-  }
-  .item-count div:nth-child(2) {
-    border-right: none;
-    border-left: none;
-  }
-  /* .bottom-delete {
+.item-count {
+  margin: 10px 18px 0 0;
+  display: flex;
+  text-align: center;
+  height: 25px;
+  width: auto;
+}
+.item-count div {
+  height: 23px;
+  line-height: 23px;
+  outline: none;
+  background-color: #fff;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-collapse: collapse;
+  width: 30px;
+}
+.item-count div:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.item-count div:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.item-count div:nth-child(2) {
+  border-right: none;
+  border-left: none;
+}
+/* .bottom-delete {
     color: #fc0a0a;
     border: 1px solid #fc0a0a;
     font-size: 14px;

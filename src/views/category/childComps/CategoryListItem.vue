@@ -1,79 +1,57 @@
 <template>
-  <div class="list-right">
-    <!-- <div class="list-item">
-      <img src="~assets/img/category/qunzitaozhuang.webp" alt="">
-      <div>裙子套装</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/duanxiu.webp" alt="">
-      <div>短袖</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/lianyiqun.webp" alt="">
-      <div>连衣裙</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/shishangtaozhuang.webp" alt="">
-      <div>时尚套装</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/banshenqun.webp" alt="">
-      <div>半身裙</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/fangshaiyi.webp" alt="">
-      <div>防晒衣</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/beixin.webp" alt="">
-      <div>背心</div>
-    </div>
-    <div class="list-item">
-      <img src="~assets/img/category/duanku.webp" alt="">
-      <div>短裤</div>
-    </div> -->
-
-    <div class="list-item" v-for="item in category">
-      <img :src="item.imgURL" alt="">
-      <div>{{item.name}}</div>
+  <div class="category-detail">
+    <div
+      :key="index"
+      class="category-detail-item"
+      v-for="(item, index) in subcategoryList"
+    >
+      <a :href="item.link">
+        <img :src="item.image" alt="" />
+        <p>{{ item.title }}</p>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "CategoryListItem",
-    props: {
-      category: Object,
+export default {
+  name: "CategoryListItem",
+  props: {
+    subcategoryList: {
+      type: Array,
       default() {
-        return {}
+        return [];
       },
     },
-    computed: {
-      showImg() {
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style scoped>
-  .list-right {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    position: fixed;
-    right: 0;
-    text-align: center;
-  }
-  .list-item {
-    /* margin: 15px; */
-  }
-  .list-item img {
-    width: 55px;
-    height: 55px;
-    margin: 15px;
-  }
-  .list-item div {
-    font-size: 14px;
-  }
+.category-detail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 10px;
+}
+.category-detail-item {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 80px;
+  height: 100px;
+  margin-bottom: 5px;
+}
+.category-detail-item img {
+  width: 65px;
+  margin-bottom: 5px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.category-detail-item p {
+  font-size: 14px;
+  text-align: center;
+}
 </style>
