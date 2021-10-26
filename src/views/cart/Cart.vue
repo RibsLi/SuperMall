@@ -15,8 +15,13 @@
       :operation="operation"
       @goShoping="goShoping"
       @showLoadding="showLoadding"
+      v-show="$store.state.cartList.length ? true : false"
     />
 
+    <div class="null-cart" v-show="$store.state.cartList.length ? false : true">
+      <img src="~assets/img/cart/gouwu.png" alt="">
+      <span>购物车还是空的，快去逛逛吧</span>
+    </div>
     <div class="goShoping" v-show="isShoping">先去选购一些东西吧</div>
     <div class="loadding" v-show="loadding">
       <img src="~assets/img/cart/loadding.gif" alt="" />
@@ -36,6 +41,7 @@ export default {
   data() {
     return {
       operation: true,
+      isShow: true,
       isShoping: false,
       loadding: false,
     };
@@ -79,6 +85,19 @@ export default {
 .nav-bar {
   background-color: var(--color-tint);
   color: #fff;
+}
+.null-cart {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+.null-cart img {
+  width: 50%;
+  height: 50%;
+  margin-left: 50%;
+  margin-top: 50%;
+  transform: translate(-50%);
+  margin-bottom: 10px;
 }
 .goShoping {
   position: fixed;
