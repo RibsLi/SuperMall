@@ -10,12 +10,12 @@
         <span class="text">店铺</span>
       </div>
       <div @click="isCollect = !isCollect">
-        <i class="icon" :class="{iconActive: isCollect}"></i>
+        <i class="icon" :class="{collectActive: isCollect}"></i>
         <span class="text" :class="{textActive: isCollect}">{{collectClick()}}</span>
       </div>
       <div @click="cartClick">
         <i class="icon cart"></i>
-        <span class="text">购物车</span>
+        <span class="text">购物车<i class="cart-count">{{this.$store.state.cartList.length}}</i></span>
       </div>
     </div>
     <div class="bar-item bar-right">
@@ -96,17 +96,31 @@ export default {
   background-position: 0 -98px;
 }
 
-.bar-left .cart{
-  background: url("~assets/img/detail/cart_active.png") 0 0/100%;
+.bar-left .cart {
+  background: url("~assets/img/detail/cart.png") 0 0/100%;
 }
 
-.bar-left .iconActive {
+.bar-left .collectActive {
   background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
   background-position: 0 -25px;
 }
 
 .bar-left .textActive {
   color: var(--color-high-text);
+}
+
+.cart-count {
+  position: relative;
+  top: -45px;
+  right: -10px;
+  background-color: var(--color-high-text);
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 15px;
 }
 
 .bar-right {
