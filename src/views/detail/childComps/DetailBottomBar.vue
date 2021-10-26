@@ -9,15 +9,19 @@
         <i class="icon shop"></i>
         <span class="text">店铺</span>
       </div>
-      <div>
-        <i class="icon select"></i>
-        <span class="text">收藏</span>
+      <div @click="isCollect = !isCollect">
+        <i class="icon" :class="{iconActive: isCollect}"></i>
+        <span class="text" :class="{textActive: isCollect}">{{collectClick()}}</span>
+      </div>
+      <div @click="cartClick">
+        <i class="icon cart"></i>
+        <span class="text">购物车</span>
       </div>
     </div>
     <div class="bar-item bar-right">
       <div class="detail-menu">
         <div class="cart cart-and-buy" @click="addToCart">加入购物车</div>
-        <div class="buy cart-and-buy">点击购买</div>
+        <div class="buy cart-and-buy" @click="buyClick">点击购买</div>
       </div>
     </div>
   </div>
@@ -26,10 +30,25 @@
 <script>
 export default {
   name: "DetailBottomBar",
+  data() {
+    return {
+      isCollect: false
+    }
+  },
   methods: {
     addToCart() {
       this.$emit("addToCart");
     },
+    collectClick() {
+      return this.isCollect ? '已收藏' : '收藏'
+    },
+    cartClick() {
+      this.$router.push('/cart')
+    },
+    buyClick() {
+      this.$emit("addToCart");
+      this.$router.push('/cart')
+    }
   },
 };
 </script>
@@ -75,6 +94,19 @@ export default {
 
 .bar-left .shop {
   background-position: 0 -98px;
+}
+
+.bar-left .cart{
+  background: url("~assets/img/detail/cart_active.png") 0 0/100%;
+}
+
+.bar-left .iconActive {
+  background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
+  background-position: 0 -25px;
+}
+
+.bar-left .textActive {
+  color: var(--color-high-text);
 }
 
 .bar-right {

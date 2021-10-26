@@ -17,7 +17,7 @@
         @detailImagLoad="detailImagLoad"
       />
       <detail-comment-info :comment-info="commentInfo" ref="comment" />
-      <goods-list :goods="recommends" ref="recommend" />
+      <goods-list :goods="recommends" ref="recommend" :isRecommend="true" />
       <detail-base-line />
     </scroll>
     <detail-bottom-bar @addToCart="addToCart" />
