@@ -4,22 +4,23 @@
       <template v-slot:center>商品分类</template>
     </nav-bar>
     <category-list :categories="categories" @categoryClick="categoryClick" />
-    <scroll class="content1" :pull-up-load="true">
+    <scroll class="content1" :pull-up-load="true" ref="scroll" @scroll="contentScroll" :probe-type="3">
       <category-list-item :subcategoryList="subcategoryList" />
       <tab-control :titles="titles" @tabClick="tabClick" ref="tabControl" />
       <goods-list :goods="categoryDetailList" />
     </scroll>
+    <back-top @click.native="backTopClick" v-show="isShowBackTop" />
   </div>
 </template>
 
 <script>
 import NavBar from "components/common/navbar/NavBar";
-import Scroll from "components/common/scroll/Scroll";
-import BackTop from "components/content/backTop/BackTop";
 import CategoryList from "./childComps/CategoryList";
 import CategoryListItem from "./childComps/CategoryListItem";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
+import Scroll from "components/common/scroll/Scroll";
+import BackTop from "components/content/backTop/BackTop";
 
 import {
   getCategory,
@@ -36,6 +37,7 @@ export default {
       subcategoryList: [],
       titles: ["流行", "新款", "精选"],
       categoryDetailList: [],
+      isShowBackTop: false,
     };
   },
   components: {
@@ -45,6 +47,7 @@ export default {
     CategoryListItem,
     TabControl,
     GoodsList,
+    BackTop,
   },
   created() {
     this.getCategory();
@@ -89,6 +92,12 @@ export default {
       const typeList = ["pop", "new", "sell"];
       // 切换类型数据
       this.getCategoryDetail(this.categories[this.currentIndex].miniWallkey, typeList[index]);
+    },
+    backTopClick() {
+      this.$refs.scroll.scrollTo(0, 0);
+    },
+    contentScroll(createpositon) {
+      this.isShowBackTop = -createpositon.y > 800;
     }
   },
 };
