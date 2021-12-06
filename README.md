@@ -23,7 +23,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 我这个版本可能有点高，脚手架是4.x的，自己完善了一些功能
 
 ### 主要效果预览：
-  ### 预览链接： www.ishopping.top
 ![1](https://user-images.githubusercontent.com/90769279/144637441-684b4e29-963d-4c47-a578-6f56fe5ea6f6.png)
 
 ![2](https://user-images.githubusercontent.com/90769279/144637449-d4a329a9-62a1-499b-ab60-a62ccfac2e7f.png)
