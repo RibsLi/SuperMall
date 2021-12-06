@@ -1,23 +1,3 @@
-# supermall
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 跟着coderwhy老师学习的项目，收获很多，真的非常感谢coderwhy老师！！
 
 我这个版本可能有点高，脚手架是4.x的，自己完善了一些功能
